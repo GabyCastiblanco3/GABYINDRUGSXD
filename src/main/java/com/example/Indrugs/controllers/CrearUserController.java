@@ -31,7 +31,7 @@ public class CrearUserController {
     public String mostrarRegistrar(Model model){
 
         model.addAttribute("usuarioNuevo", new UsuarioCreateDTO());
-        return "6.pagina_registrar_usuario";
+        return "6.pagina_registrar_usuario.html";
     }
 
     @PostMapping({"/registrar"})

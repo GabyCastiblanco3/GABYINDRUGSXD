@@ -34,7 +34,7 @@ body{
  .cabeza_indrugs{
     background-color: #022c5c;
     color:rgb(212, 239, 250);
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
 }

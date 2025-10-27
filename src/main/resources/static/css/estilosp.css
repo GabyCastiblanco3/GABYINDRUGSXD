@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 /*toda la pagina*/
 body{
-    font-family: Quicksand;
+    font-family: Poppins;
     margin: 0;
 }
 /*lineas*/
@@ -12,7 +13,7 @@ body{
 }
 /*Encabezado*/
 /*letra y fondo*/
-.contenedeor_cabeza{
+.header{
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
@@ -26,7 +27,7 @@ body{
 .cabeza_indrugs{
     background-color: #022c5c;
     color:rgb(212, 239, 250);
-    position: fixed;
+    position: relative;
     top: 0;
     width: 100%;
 }
