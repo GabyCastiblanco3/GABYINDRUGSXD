@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+
+body, form, input, select, label, button, h1, h2, h3, h4, h5, h6, span, div, p {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 400;
+  color: #0d3b36; /* tono verde oscuro similar al botón */
+}
+/* ===== Fondo general ===== */
+body {
+    font-family: 'Nunito', sans-serif !important;
+    background: url('/imagenes/Medicamento/fondologin.png') no-repeat center center fixed;!important;
+    background-size: 16px;
+    color: #222;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 🔹 Centrado vertical */
+}
+
+/* ===== Contenedor principal ===== */
+.cuerpo_indrugs {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0; /* 🔹 Espacio arriba y abajo */
+}
+
+/* ===== Tarjeta/formulario ===== */
+.datos_registrarse {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    padding: 40px;
+    max-width: 450px;
+    width: 90%;
+    margin: auto;
+}
+
+/* ===== Título ===== */
+.datos_registrarse h1 {
+    text-align: center;
+    color: #003b31; /* Verde oscuro corporativo */
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* ===== Botón ===== */
+button.btn-primary {
+    background-color: #005f4b; /* Verde oscuro */
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background-color: #008060; /* Verde más claro al pasar el mouse */
+}

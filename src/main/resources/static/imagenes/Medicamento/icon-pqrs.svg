@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+    <rect width="64" height="64" rx="12" fill="none"/> <!-- Sin fondo -->
+    <path d="M18 20h28a2 2 0 0 1 2 2v24a2 2 0 0 1-2 2H22l-8 6v-6h-2a2 2 0 0 1-2-2V22a2 2 0 0 1 2-2z" fill="#1f8aa7"/> <!-- Azul pastel -->
+    <path d="M22 28h20M22 36h14M22 44h10" stroke="#A8D8FF" stroke-width="3" stroke-linecap="round"/> <!-- Azul pastel -->
+</svg>

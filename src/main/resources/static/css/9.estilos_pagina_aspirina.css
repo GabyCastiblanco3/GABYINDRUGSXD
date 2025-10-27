@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+/* Contenedor de imagen y contenido */
+.contiene-img {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 2;
+    width: 100%;
+    min-height: 400px;
+    margin-bottom: 2rem;
+}
+
+/* Estilo para la imagen del medicamento */
+.img-medicamento {
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+    border: 1px solid rgb(182, 180, 180);
+    border-radius: 8px;
+}
+
+/* Contenedor de la información */
+.info-medicamento {
+    color: rgb(0, 0, 0);
+    max-width: 500px;
+    padding: 1rem;
+}
+
+/* Título del medicamento */
+.nombre-medicamento {
+    font-family: Quicksand;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Descripción */
+.descripcion-medicamento {
+    font-size: 18px;
+    margin-bottom: 1rem;
+}
+
+/* Input cantidad */
+#cantidad_solicitada {
+    width: 100px;
+    padding: 5px 8px;
+    font-size: 16px;
+    color: #000;
+    background-color: #fff;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+#cantidad_solicitada:hover {
+    border-color: #888;
+    background-color: #f1f1f1;
+}
+
+#cantidad_solicitada:focus {
+    border-color: #cfeecf;
+    outline: none;
+    box-shadow: 0 0 5px #abebab;
+}
+
+/* Botón de solicitar */
+#boton_solicitar {
+    width: 100%;
+    background-color: #23c72b;
+    color: white;
+    padding: 14px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#boton_solicitar:hover {
+    background-color: #1ea528;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contiene-img {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .img-medicamento {
+        width: 300px;
+        height: 300px;
+    }
+
+    .info-medicamento {
+        max-width: 90%;
+    }
+}

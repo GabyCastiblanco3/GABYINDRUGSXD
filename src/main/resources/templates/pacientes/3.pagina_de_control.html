@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Control</title>
+    <script src="https://kit.fontawesome.com/14122cd484.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/1.estilos_pagina_inicio.css}">
+    <link rel="stylesheet" th:href="@{/css/3.estilos_página_control.css}">
+</head>
+
+<body>
+<header th:insert="Layouts/header_footerPaciente :: header"></header>
+
+<main class="cuerpo_indrugs">
+    <div th:insert="Layouts/header_footerPaciente :: error"></div>
+    <div class="contenido">
+        <h1 id="titulo_control">Control</h1>
+
+        <form method="post" th:action="@{/agregar_control}" th:object="${control}"   class="row mx-auto mt-3 g-3 needs-validation" novalidate>
+            <h2>Información personal</h2>
+
+            <input type="hidden" name="idUsuario" th:value="${usuarioLogueado.idUsuario}" />
+
+            <div class="col-12">
+                <label for="iniciot">Fecha inicio tratamiento:</label>
+                <input type="datetime-local" id="iniciot" name="fechaInicioTratamiento" class="form-control" required>
+                <div class="valid-feedback">BIEN.</div>
+                <div class="invalid-feedback">Por favor ingrese una fecha correcta.</div>
+            </div>
+
+            <div class="col-12">
+                <label for="fint">Fecha fin tratamiento:</label>
+                <input type="datetime-local" id="fint" name="fechaFinTratamiento" class="form-control" required>
+                <div class="valid-feedback">BIEN.</div>
+                <div class="invalid-feedback">Por favor ingrese una fecha correcta.</div>
+            </div>
+
+            <h2>Información médica</h2>
+
+            <div class="col-12">
+                <label for="problema">Problema de salud:</label>
+                <textarea id="problema" name="problemaSalud" class="form-control" rows="4" required></textarea>
+                <div class="valid-feedback">BIEN.</div>
+                <div class="invalid-feedback">Por favor ingrese su problema de salud.</div>
+            </div>
+
+            <div class="mt-3 col-6">
+                <label for="cantidad_frecuencia">Cantidad medicamento:</label>
+                <input type="text" name="cantidadMedic" class="form-control" id="cantidad_frecuencia" required>
+                <div class="valid-feedback">BIEN.</div>
+                <div class="invalid-feedback">Por favor ingrese la cantidad de medicamento.</div>
+            </div>
+
+            <div class="mt-3 col-6">
+                <label>Medicamento:</label>
+                <select th:field="*{idMedicamento}" class="form-select" required>
+                    <option value="" disabled selected>Seleccione un medicamento</option>
+                    <option th:each="med : ${medicamentos}"
+                            th:value="${med.idMedicamento}"
+                            th:text="${med.nombreMedicamento}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="mt-3 col-6">
+                <label for="frecuencia">Frecuencia:</label>
+                <input type="text" name="frecuenciaMedic" class="form-control" id="frecuencia" required>
+                <div class="valid-feedback">BIEN.</div>
+                <div class="invalid-feedback">Por favor ingrese la frecuencia.</div>
+            </div>
+
+            <div class="mt-3 col-6">
+                <label for="alarma">Hora de alarma:</label>
+                <input type="time" name="alarmaControl" class="form-control" id="alarma" required>
+                <div class="valid-feedback">BIEN.</div>
+                <div class="invalid-feedback">Por favor ingrese una hora.</div>
+            </div>
+
+            <div class="mt-3 col-12">
+                <button class="btn btn-primary" type="submit">Agregar control</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer th:insert="Layouts/header_footerPaciente :: footer"></footer>
+
+<script>
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+</body>
+</html>
