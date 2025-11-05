@@ -25,7 +25,7 @@ public class UsuarioMapper {
         dto.setNombreRol(usuario.getRol().getNombreRol());
         dto.setEstado(usuario.getEstado());
         dto.setTelefono(usuario.getTelefono());
-         //devuelve el dto creado
+        //devuelve el dto creado
         return dto;
     }
     //Mapear crear dto a entitie
@@ -79,3 +79,4 @@ public class UsuarioMapper {
         return updateDTO;
     }
 }
+

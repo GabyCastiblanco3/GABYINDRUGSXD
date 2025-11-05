@@ -1,15 +1,107 @@
-ol a{
-    text-decoration: none;
-    color: black;
+/* --- Diseño general --- */
+.cuerpo_indrugs {
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
 }
-h1{
+
+.contenido {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+    padding: 40px 60px;
+    max-width: 850px;
+    width: 90%;
+}
+
+.contenido h1 {
     text-align: center;
+    color: #12343b;
+    font-weight: 600;
+    margin-bottom: 40px;
+    font-size: 2rem;
 }
-.mp_pp{
-    width: 100%;
-    background-color: rgb(248, 248, 248);
-    padding: 2%;
-    border: solid 1px rgb(13, 105, 36);
-    margin-top: 10px;
-    box-shadow: 0px 2px 9px 2px rgba(139, 137, 137, 0.5);
+
+/* --- Estilo del mapa --- */
+.mp_pp {
+    background-color: #fcfcfc;
+    border: 1px solid #c9e0db;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+.mp_pp ol {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0 10px 25px;
+}
+
+.mp_pp ol ol {
+    padding-left: 30px;
+    border-left: 2px solid #d7e9e4;
+}
+
+/* --- Enlaces --- */
+.mp_pp a {
+    text-decoration: none;
+    color: #12343b;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.mp_pp a:hover {
+    color: #00796b;
+    transform: translateX(6px);
+}
+
+/* --- Títulos e íconos --- */
+.mp_pp h2, .mp_pp h3 {
+    display: inline;
+    font-weight: 500;
+    margin: 0;
+}
+
+.mp_pp h2 {
+    font-size: 1.2rem;
+    color: #0f2f2f;
+}
+
+.mp_pp h3 {
+    font-size: 1rem;
+    color: #333;
+}
+
+.mp_pp i {
+    color: #00796b;
+    margin-right: 8px;
+}
+
+/* --- Animación de íconos --- */
+.mp_pp a:hover i {
+    transform: rotate(-10deg) scale(1.2);
+    transition: transform 0.3s ease;
+}
+/* Quita cualquier efecto de "hover" sobre los ítems del mapa */
+.mapa-navegacion li {
+  transition: none;           /* sin animaciones */
+  cursor: default;            /* cambia el cursor a normal, no "manito" */
+}
+
+/* Asegura que al pasar el mouse no cambie el color, sombra ni posición */
+.mapa-navegacion li:hover {
+  transform: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+/* Si usas enlaces (a), los neutralizamos visualmente también */
+.mapa-navegacion a {
+  text-decoration: none;
+  color: inherit;
+  pointer-events: none;  /* evita clics si accidentalmente hay un enlace */
+  cursor: default;
 }

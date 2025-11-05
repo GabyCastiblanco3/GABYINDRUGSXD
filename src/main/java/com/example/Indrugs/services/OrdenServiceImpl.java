@@ -60,7 +60,7 @@ public class OrdenServiceImpl implements OrdenService {
     @Override
     public void crear(OrdenDTO ordenDTO,Long idUsuario, Long idMedicamento)    {
 
-            Orden orden = OrdenMapper.toEntity(ordenDTO);
+        Orden orden = OrdenMapper.toEntity(ordenDTO);
         Usuario usuario = usuarioRepository.findByIdUsuario(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         orden.setPaciente(usuario);

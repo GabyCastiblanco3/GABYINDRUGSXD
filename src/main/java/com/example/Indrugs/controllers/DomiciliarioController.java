@@ -58,8 +58,8 @@ public class DomiciliarioController {
 
     @GetMapping("/actualizar/domicilio/{idDomicilio}")
     public String cambiarEstado(@PathVariable Long idDomicilio) {
-            domicilioService.actualizar(idDomicilio);
-            return "redirect:/15.pagina_domicilio_domi";
+        domicilioService.actualizar(idDomicilio);
+        return "redirect:/15.pagina_domicilio_domi";
     }
 
     @GetMapping("/15.pagina_domicilio_domi")

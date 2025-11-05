@@ -12,5 +12,3 @@ public interface DomicilioService {
     List<DomicilioDTO> ObtenerDomiciliosRecientes();
     Map<String,Object> ObtenerResumen();
 }
-
-

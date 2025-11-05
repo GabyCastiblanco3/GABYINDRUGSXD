@@ -1,256 +1,237 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+/* =====================================================
+   FUENTE Y CONFIGURACIÓN GLOBAL
+===================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 
-html{
-    scroll-behavior: smooth;
-}
-/*toda la pagina*/
-body{
-   font-family: "Poppins", Arial, sans-serif;
-    background-color: #d8d8d8;/* Gris suave */
-    color: #333;
-    margin: 0;
-    padding: 0;
+html {
+  scroll-behavior: smooth;
 }
 
-/*lineas*/
+body, html {
+  margin: 0;
+  padding: 0;
+}
 
-/*Encabezado*/
-/*letra y fondo*/
-header {
+body {
+  font-family: "Nunito", Arial, sans-serif !important;
+  background-color: #d8d8d8; /* Gris suave */
+  color: #333;
+}
+
+/* =====================================================
+   ENCABEZADO (HEADER)
+===================================================== */
+.cabeza_indrugs {
   background-color: #00796b;
-  color: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  position: sticky;
+  color: #eaf8f6;
+  width: 100%;
+  position: relative;
   top: 0;
   z-index: 1000;
-  padding: 8px 0;
-}
-.logo_nav_items{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
- .cabeza_indrugs{
-    background-color:#00796b;
-    color:rgb(212, 239, 250);
-    position: relative;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 8px 30px;
 }
 
-/*Logo*/
-.img_indrugs_logo{
-    width: 150px;
-    margin-top: 0px;
-    margin-left: 5px;
+.logo_nav_items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 }
-    .logo{
-        letter-spacing: 0.1rem;
-        font-size:  2.5em;
-        font-weight: 800;
-        color:rgb(212, 239, 250);
-        text-decoration: none;
-    }
 
+/* LOGO */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #eaf8f6;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.img_indrugs_logo {
+  width: 55px;
+  height: auto;
+}
+
+/* BUSCADOR */
 #buscador {
-    background-color:#f5f5f5;
-    width: 300px;
-    border: solid 1px rgb(107, 209, 12);
-    border-bottom: solid 1px rgb(107, 209, 12);
-    padding: 8px 10px;
-    outline: none;
-    border-radius: 15px;
-
-}
-/*Barra nav 1*/
-#iconos{
-    width:30px;
-    margin-top: 0px;
-    margin-left: 0px;
-    border-radius: 70%;
-}
-    .navegacion_1 .barra_1{
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        font-size: 22px;
-        font-weight: 700;
-        width: 100%;
-    }
-        .navegacion_1 .barra_1 #items_barra1{
-            display: inline-block;
-        }
-            .navegacion_1 .barra_1 #items_barra1 #enlaces_barra1{
-                display: block;
-                padding: 0.5rem 1rem;
-                transition: all 0.4s linear;
-                border-radius: 7px;
-            }
-                .navegacion_1 .barra_1 #items_barra1 #enlaces_barra1:hover{
-                    background: rgb(107, 209, 12);
-                    padding: 0.3rem 0.5rem 0.1rem 0.3rem;
-                    margin-top: 6px;
-                    border-radius: 70%;
-                }
-/*Barra nav 2*/
-.menu .barra_2{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-size: 22px;
-    font-weight: 700;
-    width: 100%;
-}
-    .menu .barra_2 #items_barra{
-        display: inline-block;
-    }
-        .menu .barra_2 #items_barra #enlaces_barra{
-            display: block;
-            padding: 0.5rem 1rem;
-            transition: all 0.4s linear;
-            border-radius: 7px;
-            color:rgb(212, 239, 250);
-            text-decoration: none;
-        }
-            .menu .barra_2 #items_barra #enlaces_barra:hover{
-                background: rgb(107, 209, 12);
-                padding: 0.7rem 1.5rem;
-                margin-top: 6px;
-            }
-/*Codigo ajustable*/
-@media only screen and (max-width:767px){
-    .navegacion_1{
-        width: 100%;
-        margin-top: 1rem;
-    }
-        .navegacion_1 .barra_1 #items_barra1{
-            display: block;
-        }
-            .navegacion_1 .barra_1 #items_barra1 #enlaces_barra1{
-                display: block;
-                padding: 0.2rem 0;
-                transition: all 0.4s linear;
-                border-radius: 7px;
-            }
-                .navegacion_1 .barra_1 #items_barra1 #enlaces_barra1:hover{
-                    background: rgb(107, 209, 12);
-                    padding: 30;
-                    border-radius: 2%;
-                }
-/*Barra nav 2*/
-.menu{
-    width: 100%;
-    margin-top: 1rem;
-}
-    .menu .barra_2 #items_barra{
-        display: block;
-    }
-        .menu .barra_2 #items_barra #enlaces_barra{
-            display: block;
-            padding: 0.5rem 0;
-            transition: all 0.4s linear;
-            border-radius: 7px;
-        }
-            .menu .barra_2 #items_barra #enlaces_barra:hover{
-                background: #6bd10c;
-            }
-}
-@media only screen and (max-width:767px){
-.cuerpo_indrugs{
-    margin-top: 28rem;
-}
+  background-color: #f5f5f5;
+  width: 300px;
+  border: 1px solid rgb(107, 209, 12);
+  padding: 8px 10px;
+  outline: none;
+  border-radius: 15px;
 }
 
-/*Body*/
-.cuerpo_indrugs{
-    padding-top: 10rem;
-    background-color: rgb(255, 255, 255);
-    font-family:Quicksand;
-    color: rgb(0, 0, 0);
-}
-.contenido{
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-/* ===== HERO SECTION ===== */
-.hero-box {
-    background: rgba(255, 255, 255, 0.85); /* Fondo blanco translúcido */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 15px;
-    padding: 50px 40px;
-    max-width: 1000px;  /* Limita el tamaño máximo */
-    width: 90%;  /* Controla el tamaño relativo, puedes cambiarlo si quieres que ocupe más o menos espacio */
-    text-align: center;  /* Centra el texto */
-    z-index: 1;
-
-    /* Asegura que los elementos dentro de hero-box estén centrados */
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* Centra los elementos horizontalmente */
-    justify-content: center;  /* Centra los elementos verticalmente */
-
-    margin: 0 auto;  /* Esto asegura que la caja se centre horizontalmente */
+/* ICONOS DE NAVEGACIÓN */
+#iconos {
+  width: 24px;
+  height: 24px;
+  border-radius: 70%;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
+#iconos:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+/* NAV 1 */
+.navegacion_1 .barra_1 {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* NAV 2 */
+.menu {
+  margin-top: 5px;
+}
+
+.menu .barra_2 {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  list-style: none;
+  padding: 6px 0;
+  margin: 0 auto;
+  background-color: #00897b;
+  border-radius: 10px;
+  width: fit-content;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.menu .barra_2 #enlaces_barra {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.menu .barra_2 #enlaces_barra:hover {
+  color: #c8fff4;
+}
+
+/* Quitar línea separadora */
+.linea_separación {
+  display: none;
+}
+
+/* =====================================================
+   CONTENIDO PRINCIPAL
+===================================================== */
+.cuerpo_indrugs {
+  background-color: #ffffff;
+  color: #000;
+  font-family: "Nunito", sans-serif;
+  padding-top: 2rem !important;
+  margin-top: 0 !important;
+}
+
+.contenido {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* =====================================================
+   SECCIÓN HERO
+===================================================== */
 .hero {
-    background-image: url('/imagenes/Medicamento/hero.jpg'); /* Asegúrate de que la imagen esté correcta */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 80vh;
-    display: flex;
-    justify-content: center;  /* Centra horizontalmente */
-    align-items: center;      /* Centra verticalmente */
-    position: relative;
+  background-image: url('/imagenes/Medicamento/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    width: 100%; /* Se asegura de que ocupe todo el ancho disponible */
-    max-width: 600px; /* Limita el ancho máximo */
-    margin-top: 25px;
+.hero-box {
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 50px 40px;
+  max-width: 1000px;
+  width: 90%;
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
 
-.search-bar .form-select,
-.search-bar .form-control {
-    border-radius: 10px;
-    height: 45px;
-    border: 1px solid #ccc;
-    width: 100%;  /* Ocupa todo el espacio disponible */
+/* =====================================================
+   SECCIÓN MEDICAMENTOS DESTACADOS
+===================================================== */
+.medicamentos-destacados {
+  background-color: #eef6f9;
+  padding: 60px 0;
+  border-radius: 25px;
 }
 
-.search-bar .btn-custom {
-    background: #00796b;
-    color: white;
-    border-radius: 10px;
-    padding: 0 25px;
-    height: 45px;
-    border: none;
+.medicamentos-destacados h2 {
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #064854;
 }
 
-/* ===== SECCIONES DE CATEGORÍAS Y PRODUCTOS ===== */
+.medicamentos-destacados p {
+  color: #555;
+}
+
+.medicamentos-destacados .card img {
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+/* =====================================================
+   SECCIONES DE CATEGORÍAS Y PRODUCTOS
+===================================================== */
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #064854;
+}
+
 .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Esto ajusta automáticamente el tamaño de las columnas */
-    gap: 30px;
-    margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
 }
 
 .feature {
-    background-color: #f0f0f0; /* Gris claro */
-    border-radius: 10px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    max-width: 280px; /* Limita el tamaño máximo */
-    margin: 0 auto;  /* Alinea las cajas en el centro */
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 280px;
+  margin: 0 auto;
 }
 
 .feature:hover {
@@ -276,148 +257,199 @@ header {
   margin-bottom: 20px;
 }
 
-.section-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 25px;
-  font-weight: 600;
-  color: #064854;
-}
-
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Cuadrícula adaptable */
-  gap: 40px;  /* Aumenta el espaciado entre las cajas */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
   margin-top: 50px;
 }
 
 .card {
-    background-color: #f5f5f5 !important;  /* Gris claro */
-    border-radius: 10px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  background-color: #f5f5f5 !important;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-5px);  /* Efecto hover en los productos */
+  transform: translateY(-5px);
 }
 
 .card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;  /* Ajuste de las imágenes */
-    border-radius: 10px;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .card h4 {
-    font-size: 1.2em;
-    color: #064854;
-    margin-top: 15px;
+  font-size: 1.2em;
+  color: #064854;
+  margin-top: 15px;
 }
 
 .card p {
-    font-size: 1em;
-    color: #777;
-    margin-bottom: 15px;
+  font-size: 1em;
+  color: #777;
+  margin-bottom: 15px;
 }
 
 .card .btn-custom {
-    background-color: #00796b;
-    color: white;
-    padding: 10px 22px;
-    font-size: 1em;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+  background-color: #00796b;
+  color: white;
+  padding: 10px 22px;
+  font-size: 1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .card .btn-custom:hover {
-    background-color: #00695c;
+  background-color: #00695c;
 }
 
+/* =====================================================
+   EPS
+===================================================== */
+.imagenes_eps {
+  display: flex;
+  border: 2px solid rgb(252, 251, 251);
+}
 
+.eps, .eps_compensar, .eps_sura, .eps_saludtotal {
+  background-color: #fff;
+  border-radius: 10%;
 }
-.imagenes_eps{
-    border: 2px solid rgb(252, 251, 251);/*Es lo grueso de la imagen*/
-    display: flex;/*ubicacion*/
-}
-.eps{
-    background-color: rgb(255, 255, 255); /* El color de fondo*/
-    border: 2px solid rgb(253, 251, 251);/*Es lo grueso de la imagen*/
-    border-radius: 10%; /*El borde muy redondo,o muy cuadrado*/
-    height: 100px;
-    width: 10%;
-    margin-top: 90px;
-    margin-left: 0px;
-}
-.eps_compensar{
-    margin-top: 90px;
-    margin-left: 50px;
-    background-color: rgb(255, 255, 255); /* El color de fondo*/
-    border-radius: 10%; /*El borde muy redondo,o muy cuadrado*/
-    height: 100px;
-    width: 20% ;
-}
-.eps_sura{
-    margin-top: 90px;
-    margin: 40px;
-    background-color: rgb(255, 255, 255); /* El color de fondo*/
-    border-radius: 10%; /*El borde muy redondo,o muy cuadrado*/
-    height: 200px;
-    width: 20% ;
-}
-.eps_saludtotal{
-    margin-top: 90px;
-    margin: 40px;
-    background-color: rgb(255, 255, 255); /* El color de fondo*/
-    border-radius: 10%; /*El borde muy redondo,o muy cuadrado*/
-    height: 200px;
-    width: 20%;
-}
-/*Footer*/
 
-/* ==== PIE DE PÁGINA ==== */
+.eps {
+  border: 2px solid #fdfbfb;
+  height: 100px;
+  width: 10%;
+  margin-top: 90px;
+}
+
+.eps_compensar {
+  height: 100px;
+  width: 20%;
+  margin-top: 90px;
+  margin-left: 50px;
+}
+
+.eps_sura, .eps_saludtotal {
+  height: 200px;
+  width: 20%;
+  margin: 40px;
+  margin-top: 90px;
+}
+
+/* =====================================================
+   PIE DE PÁGINA
+===================================================== */
 footer {
-    background: linear-gradient(180deg, #00796b 0%, #00695c 100%);
-    color: #e0f2f1;
-    padding: 40px 0;
-    text-align: center;
-    width: 100vw;       /* ocupa todo el ancho de la pantalla */
-    margin: 0;          /* elimina márgenes */
-    position: relative;
-    left: 50%;          /* centra el footer cuando hay contenedores centrados */
-    right: 0;
-    transform: translateX(-50%); /* corrige el centrado */
-    box-sizing: border-box;
+  background-color: #00796b;
+  color: #eaf8f6;
+  text-align: center;
+  padding: 25px 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
 }
 
-body, html {
-    margin: 0;
-    padding: 0;
+footer img {
+  width: 45px;
+  margin-bottom: 8px;
+  opacity: 0.95;
+  transition: transform 0.3s ease;
 }
 
-.lista_mapa_nav, .mapa_nav{
-    list-style: none;
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-	font-family:Quicksand;
-	text-align: center;
+footer img:hover {
+  transform: scale(1.05);
 }
 
-.formularios{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    }
+footer p {
+  margin: 3px 0;
+  line-height: 1.4;
+}
 
-@media only screen and (max-width:767px){
-    .pie-pagina{
-        width: 100%;
-        background-color: rgb(2, 44, 92);
-        margin-top: 6rem;
-    }
+footer .slogan {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+footer .links-footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 15px 0 8px 0;
+}
+
+footer .links-footer a {
+  color: #eaf8f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+footer .links-footer a:hover {
+  color: #c8fff4;
+  text-decoration: underline;
+}
+
+footer .redes a img {
+  width: 22px;
+  margin: 0 6px;
+  opacity: 0.9;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+footer .redes a img:hover {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
+footer .contacto {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  line-height: 1.3;
+}
+
+footer .contacto strong {
+  color: #ffffff;
+}
+
+/* =====================================================
+   FORMULARIOS Y MEDIA QUERIES
+===================================================== */
+.formularios {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media only screen and (max-width:767px) {
+  .navegacion_1 {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .navegacion_1 .barra_1 {
+    flex-direction: column;
+  }
+
+  .menu {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .pie-pagina {
+    width: 100%;
+    background-color: rgb(2, 44, 92);
+    margin-top: 6rem;
+  }
 }

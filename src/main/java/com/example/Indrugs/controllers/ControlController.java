@@ -4,6 +4,7 @@ import com.example.Indrugs.DTO.ControlDTO;
 import com.example.Indrugs.entities.Usuario;
 import com.example.Indrugs.services.ControlService;
 import com.example.Indrugs.services.MedicamentosService;
+import com.example.Indrugs.services.EmailService; // 👈 importar tu servicio de correos
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,20 +19,22 @@ public class ControlController {
 
     private final ControlService controlService;
     private final MedicamentosService medicamentosService;
+    private final EmailService emailService; // 👈 dependencia de correo
 
-
-    public ControlController(ControlService controlService, MedicamentosService medicamentosService) {
+    public ControlController(ControlService controlService,
+                             MedicamentosService medicamentosService,
+                             EmailService emailService) { // 👈 se inyecta acá
         this.controlService = controlService;
-        this.medicamentosService=medicamentosService;
+        this.medicamentosService = medicamentosService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/24.pagina_control")
     public String mostrarPaginaControl(Model model, HttpSession session) {
-        // Obtener todos los controles para mostrar
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
-            return "redirect:/login"; // Si no está logueado
+            return "redirect:/login";
         }
 
         List<ControlDTO> controles = controlService.obtenerTodosLosControlesporUsuario(usuario.getIdUsuario());
@@ -45,19 +48,31 @@ public class ControlController {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
-            return "redirect:/login"; // Si no está logueado
+            return "redirect:/login";
         }
-        model.addAttribute("usuarioLogueado",  usuario);
+        model.addAttribute("usuarioLogueado", usuario);
         model.addAttribute("medicamentos", medicamentosService.readAdmin());
         model.addAttribute("control", new ControlDTO());
         return "pacientes/3.pagina_de_control";
     }
 
     @PostMapping("/agregar_control")
-    public String agregarControl(@ModelAttribute ControlDTO controlDTO, RedirectAttributes redirectAttributes) {
+    public String agregarControl(@ModelAttribute ControlDTO controlDTO,
+                                 HttpSession session,
+                                 RedirectAttributes redirectAttributes) {
         try {
+            // 1️⃣ Guardar control
             controlService.guardarControl(controlDTO);
-            redirectAttributes.addFlashAttribute("mensaje", "Control agregado correctamente");
+
+            // 2️⃣ Obtener correo del usuario logueado
+            Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+            if (usuario != null && usuario.getCorreo() != null) {
+                emailService.enviarCorreo(usuario.getCorreo());
+            }
+
+
+            // 3️⃣ Mensaje flash
+            redirectAttributes.addFlashAttribute("mensaje", "Control agregado correctamente. ");
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("error", e.getMessage());
         }
@@ -88,4 +103,3 @@ public class ControlController {
         return "redirect:/17.pagina_control";
     }
 }
-

@@ -1,0 +1,99 @@
+:root {
+    --color-principal: #00796b;
+}
+
+/* Sección principal */
+.hero-section {
+    background: var(--color-principal);
+    background: linear-gradient(#d8d8d8);
+    padding: 4rem 0; /* antes 6rem, se redujo para eliminar espacio extra */
+    margin-top: -20px; /* acerca más el contenido al encabezado */
+}
+
+.hero-section h1,
+.hero-section p {
+    color: #1C3B3A !important;
+}
+
+/* Color principal para títulos */
+.text-primary,
+h2.text-primary,
+h1.text-primary,
+h5.text-primary {
+    color: var(--color-principal) !important;
+}
+
+/* Ajustes generales de texto */
+h1, h2, h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+p {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    color: black;
+}
+
+/* Tarjetas del equipo */
+.team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 121, 107, 0.2);
+}
+
+/* Íconos del equipo */
+.team-card i {
+    color: var(--color-principal);
+}
+
+/* Mapa */
+.map-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+}
+
+/* Ajustes generales */
+section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+/* ===== SOLUCIÓN PARA CAPA BLANCA EN LA PÁGINA "NOSOTROS" ===== */
+
+/* Elimina cualquier fondo translúcido o imagen borrosa */
+.hero, .hero-box, .overlay, .banner, .intro-section {
+    background: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+}
+
+/* Elimina altura fija si la hay */
+.hero, .hero-box {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 5rem 0 !important;
+}
+
+/* Ajusta la posición del contenido para que suba */
+.cuerpo_indrugs {
+    padding-top: 5rem !important;
+}
+
+/* Cambia color de títulos e íconos a tu verde principal */
+h1, h2, h3, i, .fa, .fas, .far, .fab {
+    color: #00796b !important;
+}
+.hero, .hero-box {
+    background: none !important;
+    background-color: transparent !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 2rem 0 !important;
+    box-shadow: none !important;
+}

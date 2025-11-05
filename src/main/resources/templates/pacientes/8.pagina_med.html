@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Medicamentos</title>
+    <title>Medicamentos | INDRUGS </title>
     <script src="https://kit.fontawesome.com/14122cd484.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/1.estilos_pagina_inicio.css}">
@@ -30,12 +30,20 @@
 
         <div class="medicamentos-grid" id="medicamentos-container">
             <div th:each="medicamento : ${medicamentos}" class="medicamento-item">
-                <a th:href="@{/medicamentos/{idMedicamento}(idMedicamento=${medicamento.idMedicamento})}">
-                    <img class="img_tabla"
-                         th:src="@{${medicamento.imagenMedicamento}}"
-                         th:alt="${medicamento.nombreMedicamento}">
-                </a>
+                <img th:src="@{'/imagenes/MEDICAMENTOS/TABLA/' + ${medicamento.imagenMedicamento}}"
+                     th:alt="${medicamento.nombreMedicamento}">
+
+                <div class="card-body">
+                    <h3 class="card-title" th:text="${medicamento.nombreMedicamento}"></h3>
+                    <p class="card-text" th:text="${medicamento.descripcionMedicamento}"></p>
+
+                    <a class="ver-btn"
+                       th:href="@{/medicamentos/{idMedicamento}(idMedicamento=${medicamento.idMedicamento})}">
+                        Ver detalles
+                    </a>
+                </div>
             </div>
+
         </div>
 
         <div id="no-resultados" style="display: none;" class="text-center mt-4">
@@ -93,27 +101,38 @@
         }
 
         // Función para mostrar resultados - Mantener estructura simple como el HTML original
-        function mostrarResultados(medicamentos) {
-            container.innerHTML = '';
-            noResultados.style.display = 'none';
+         function mostrarResultados(medicamentos) {
+         container.innerHTML = '';
+         noResultados.style.display = 'none';
 
-            if (medicamentos.length === 0) {
-                noResultados.style.display = 'block';
-                return;
-            }
+           if (medicamentos.length === 0) {
+              noResultados.style.display = 'block';
+              return;
+         }
 
-            medicamentos.forEach(medicamento => {
-                const medicamentoDiv = document.createElement('div');
-                medicamentoDiv.className = 'medicamento-item';
-                medicamentoDiv.innerHTML = `
-                    <a href="/medicamentos/${medicamento.idMedicamento}">
-                        <img class="img_tabla"
-                             src="${medicamento.imagenMedicamento}"
-                             alt="${medicamento.nombreMedicamento}">
-                    </a>
-                `;
-                container.appendChild(medicamentoDiv);
-            });
+         medicamentos.forEach(medicamento => {
+          const medicamentoDiv = document.createElement('div');
+          medicamentoDiv.className = 'medicamento-item';
+
+          medicamentoDiv.innerHTML = `
+            <img class="img_tabla"
+                 src="/imagenes/MEDICAMENTOS/TABLA/${medicamento.imagenMedicamento}"
+                 alt="${medicamento.nombreMedicamento}">
+
+            <div class="card-body">
+                <h3 class="card-title">${medicamento.nombreMedicamento}</h3>
+                <p class="card-text">${medicamento.descripcionMedicamento}</p>
+
+                <a class="ver-btn"
+                   href="/medicamentos/${medicamento.idMedicamento}">
+                    Ver detalles
+                </a>
+            </div>
+        `;
+
+        container.appendChild(medicamentoDiv);
+    });
+
         }
 
         // Función para mostrar todos los medicamentos

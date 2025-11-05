@@ -98,4 +98,155 @@
 .cabeza1 h2{
     font-weight: 700;
 }
+/* SECCIÓN DE BIENVENIDA DEL DOMICILIARIO */
+.bienvenida-domiciliario {
+  background: linear-gradient(135deg, #dff5f0, #eafcf8);
+  text-align: center;
+  padding: 50px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin: 40px auto;
+  width: 85%;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.bienvenida-domiciliario h1 {
+  color: #004d40;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.bienvenida-domiciliario p {
+  color: #333;
+  font-size: 1.1rem;
+  margin-bottom: 35px;
+}
+
+/* PANEL DE ESTADÍSTICAS */
+.resumen-domiciliario {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.info-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 25px 20px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.info-box:hover {
+  transform: translateY(-5px);
+}
+
+.info-box i {
+  font-size: 2rem;
+  color: #009688;
+  margin-bottom: 10px;
+}
+
+.info-box p {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.dashboard {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* ==== TARJETAS PRINCIPALES ==== */
+.card {
+    background: #F9FAFB; /* gris muy suave */
+    border-radius: 22px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    width: 240px;
+    height: 260px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #E0E7EA;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(135deg, #3A86FF, #4DB6AC); /* azul a verde menta */
+    color: white;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+/* ==== ENLACES ==== */
+.card a {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* ==== ICONO ==== */
+.card_icono img {
+    width: 85px;
+    height: 85px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    margin-bottom: 15px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.card:hover .card_icono img {
+    transform: scale(1.15);
+    filter: drop-shadow(0 6px 12px rgba(255, 255, 255, 0.4));
+}
+
+/* ==== TEXTO ==== */
+.card_info {
+    margin-top: 10px;
+}
+
+.card_numeros {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1E2A3A; /* azul oscuro elegante */
+    display: block;
+}
+
+.card_nombre {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #3A86FF; /* azul principal INDRUGS */
+    letter-spacing: 0.6px;
+}
+
+/* ==== EFECTO AL PASAR EL MOUSE ==== */
+.card:hover .card_numeros,
+.card:hover .card_nombre {
+    color: #FFFFFF;
+}
 

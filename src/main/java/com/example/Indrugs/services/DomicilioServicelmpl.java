@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-    @Service
+@Service
 public class DomicilioServicelmpl implements DomicilioService{
     private final DomicilioRepository domicilioRepository;
     public DomicilioServicelmpl(DomicilioRepository domicilioRepository){
@@ -40,8 +40,8 @@ public class DomicilioServicelmpl implements DomicilioService{
     public void actualizar(Long idDomicilio) {
         Domicilio domicilio = domicilioRepository.findByIdDomicilio(idDomicilio)
                 .orElseThrow(() -> new RuntimeException("Domicilio no encontrado con id: " + idDomicilio));
-            domicilio.setEstadoDomicilio("ENTREGADO");
-            domicilioRepository.save(domicilio);
+        domicilio.setEstadoDomicilio("ENTREGADO");
+        domicilioRepository.save(domicilio);
 
     }
 

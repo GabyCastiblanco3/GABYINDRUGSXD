@@ -44,5 +44,7 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "ID_ROLES_USUARIOS")
     private Rol rol;
+
+
 }
 

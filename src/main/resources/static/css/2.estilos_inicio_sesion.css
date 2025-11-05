@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 /* Elimina el padding adicional del body */
 body {
-    background: url('/imagenes/Medicamento/fondologin.png') no-repeat center center fixed;
+    background: url('/imagenes/Medicamento/fondologin.png') no-repeat center center fixed !important;
     padding-top: 0;
     margin: 0;
 }
