@@ -1,59 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
-
-/*Body*/
-
-
-#formuno{
-    width: 50%;
-    margin-left:23%;
-    padding: 2%;
-    border: solid 1px black;
-    margin-top: 10px;
-    box-shadow: 0px 2px 9px 2px rgba(139, 137, 137, 0.5);
-    align-items: center;
-}
-           
-#titulo_domicilio{
-    text-align: center;
-    color: #0e0e0e;
-    font-family: Quicksand;
+/* CONTENEDOR PRINCIPAL */
+.form-card {
+    max-width: 650px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
 }
 
-#form_text, #archivo_formula {
-    margin: 5px o 15 px;
-    display: block;
-    font-weight: bold; 
+/* TÍTULO */
+.titulo-form {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #00796b;
 }
-        
-            input, select, textarea {
-                width: 90%;
-                padding: 10px;
-                margin: 5px 0 15px;
-                border: 1px solid black;
-                border-radius: 4px;
-            }
-            
-            #enviar_solicitud{
-                width: 100%;
-                padding: 10px;
-                background-color: #23c72b;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 16px;
-            }
-            
-            #enviar_solicitud:hover {
-                background-color: #25b62c;
-                border: 2px seagreen;
-                color: #f5eded;
-            }
 
-.form-control{
-    resize: none;
+/* INPUTS PREMIUM */
+.input-premium {
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #bbb;
+    font-size: 16px;
+    transition: all .3s ease;
 }
-.contenido{
-    align-items: center;
+
+.input-premium:focus {
+    border-color: #00a896;
+    box-shadow: 0 0 8px rgba(0,168,150,.3);
+}
+
+/* BOTÓN PREMIUM */
+.btn-premium {
+    background-color: #00796b;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 14px;
+    transition: .3s ease;
+    border: none;
+}
+
+.btn-premium:hover {
+    background-color: #005f55;
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-card {
+        padding: 25px !important;
+    }
+
+    .titulo-form {
+        font-size: 26px;
+    }
+}
+.flatpickr-input {
+    background-color: white !important;
+    height: 50px;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    font-size: 1rem;
+    border: 1px solid #cfd8dc;
+    cursor: pointer;
+}
+
+.flatpickr-calendar {
+    border-radius: 15px !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }

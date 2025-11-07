@@ -1,6 +1,7 @@
 package com.example.Indrugs.services;
 
 import com.example.Indrugs.DTO.MedicamentoDTO;
+import com.example.Indrugs.DTO.OrdenDTO;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface MedicamentosService {
     List <MedicamentoDTO> findByNombre(String nombreMedicamento);
     MedicamentoDTO buscarPorIdMedicamento(Long idMedicamento);
 
+    void guardarOrden(OrdenDTO orden);
 }

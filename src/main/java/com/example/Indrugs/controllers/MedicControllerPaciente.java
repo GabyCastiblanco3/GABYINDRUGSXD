@@ -21,13 +21,13 @@ public class MedicControllerPaciente {
     private final MedicamentosService medicService;
     private ArchivosService archivosService;
 
-    public  MedicControllerPaciente(MedicamentosService medicService, ArchivosService archivosService){
+    public MedicControllerPaciente(MedicamentosService medicService, ArchivosService archivosService) {
         this.medicService = medicService;
         this.archivosService = archivosService;
     }
 
     @GetMapping("/1.pagina_principal_paciente")
-    public String mostrarPaginaPaciente(HttpSession session){
+    public String mostrarPaginaPaciente(HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
@@ -38,7 +38,7 @@ public class MedicControllerPaciente {
     }
 
     @GetMapping("/8.pagina_med")
-    public String mostrarMedic(HttpSession session, Model model){
+    public String mostrarMedic(HttpSession session, Model model) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
 
         if (usuario == null) {
@@ -63,6 +63,31 @@ public class MedicControllerPaciente {
         return "pacientes/9.pagina_detalle_med";
     }
 
+
+    @GetMapping("/domicilio/{idMedicamento}")
+    public String mostrarFormularioDomicilio(@PathVariable Long idMedicamento,
+                                             HttpSession session, Model model) {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+        if (usuario == null) {
+            return "redirect:/login";
+        }
+
+        MedicamentoDTO medicamento = medicService.buscarPorIdMedicamento(idMedicamento);
+
+        // Crear nueva orden
+        com.example.Indrugs.DTO.OrdenDTO orden = new com.example.Indrugs.DTO.OrdenDTO();
+        orden.setPaciente(usuario.getIdUsuario());
+        orden.setIdMedicamento(idMedicamento);
+
+        model.addAttribute("orden", orden);
+        model.addAttribute("medicamento", medicamento);
+        model.addAttribute("usuarioLogueado", usuario);
+
+        return "pacientes/4.pagina_domicilio.html"; // <-- tu HTML del formulario
+    }
+
+
     @GetMapping("/api/medicamentos/buscar")
     @ResponseBody
     public ResponseEntity<List<MedicamentoDTO>> buscarMedicamentos(
@@ -80,5 +105,7 @@ public class MedicControllerPaciente {
             return ResponseEntity.status(500).build();
         }
     }
+
+
 
 }

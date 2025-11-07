@@ -65,45 +65,42 @@ public class OrdenController {
     public String mostrarformulario(@RequestParam("idMedicamento") Long idMedicamento,
                                     @RequestParam("cantidad") Integer cantidad,
                                     HttpSession session, Model model)
-    {try {
-        // Obtener usuario logueado usando tu método
-        Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-        if (usuario == null) {
-            return "redirect:/login"; // Si no está logueado
-        }
+    {
+        try {
+            Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+            if (usuario == null) {
+                return "redirect:/login";
+            }
 
+            MedicamentoDTO medicamento = medicamentosService.buscarPorIdMedicamento(idMedicamento);
+            if (medicamento == null) {
+                model.addAttribute("error", "Medicamento no encontrado");
+                return "error";
+            }
 
-        // Obtener medicamento
-        MedicamentoDTO medicamento = medicamentosService.buscarPorIdMedicamento(idMedicamento);
+            OrdenDTO ordenDTO = new OrdenDTO();
+            ordenDTO.setPacienteNombre(usuario.getNombre());
+            ordenDTO.setCantidad(cantidad);
+            ordenDTO.setNombreMedicamento(medicamento.getNombreMedicamento());
+            ordenDTO.setEstadoOrden("ACTIVO");
 
-        if (medicamento == null) {
-            model.addAttribute("error", "Medicamento no encontrado");
+            // 📌 ESTO ES LO IMPORTANTE:
+            model.addAttribute("orden", ordenDTO);
+            model.addAttribute("usuarioLogueado", usuario);
+            model.addAttribute("medicamento", medicamento);
+            model.addAttribute("idMedicamento", idMedicamento);
+            model.addAttribute("cantidad", cantidad);
+
+            return "pacientes/4.pagina_domicilio";
+
+        } catch (Exception e) {
+            model.addAttribute("error", "Error: " + e.getMessage());
             return "error";
         }
-
-        // Crear nueva orden DTO
-        OrdenDTO ordenDTO = new OrdenDTO();
-        ordenDTO.setPacienteNombre(usuario.getNombre());
-        ordenDTO.setCantidad(cantidad);
-        ordenDTO.setNombreMedicamento(medicamento.getNombreMedicamento());
-        ordenDTO.setEstadoOrden("ACTIVO");
-
-        // Agregar al modelo
-        model.addAttribute("orden", ordenDTO);
-        model.addAttribute("usuarioLogueado", usuario);
-        model.addAttribute("medicamento", medicamento);
-        model.addAttribute("idMedicamento", idMedicamento);
-        model.addAttribute("cantidad", cantidad);
-
-        return "pacientes/4.pagina_domicilio";
-
-    } catch (Exception e) {
-        model.addAttribute("error", "Error al cargar el formulario: " + e.getMessage());
-        return "error";
-    }
     }
 
-    @PostMapping("/guardar")
+
+    @PostMapping("/orden/guardar")
     public String guardarOrden(@ModelAttribute OrdenDTO ordenDTO,
 //                               @RequestParam("formulaFile") MultipartFile formulaFile,
                                @RequestParam("idMedicamento") Long idMedicamento,
@@ -131,7 +128,10 @@ public class OrdenController {
             }
             ordenService.crear(ordenDTO,usuario.getIdUsuario(),idMedicamento);
             redirectAttributes.addFlashAttribute("mensaje", "Orden creada exitosamente");
-            return "redirect:/16.pagina_carrito_med";
+
+            model.addAttribute("medicamento", medicamento);
+            model.addAttribute("orden", ordenDTO);
+            return "pacientes/confirmacionPedido";
 
         } catch (Exception e) {
             model.addAttribute("error", "Error al guardar la orden: " + e.getMessage());
@@ -153,5 +153,11 @@ public class OrdenController {
     public String entregarOrdenDesdeAdmin(@PathVariable Long idOrden) {
         ordenService.eliminar(idOrden);
         return "redirect:/18.pagina_orden_admin";
+    }
+    @GetMapping("/confirmacion-pedido")
+    public String mostrarConfirmacion() {
+        return "pacientes/confirmacionPedido";
+
+
     }
 }

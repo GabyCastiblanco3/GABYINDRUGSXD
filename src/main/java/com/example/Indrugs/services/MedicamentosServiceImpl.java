@@ -1,6 +1,7 @@
 package com.example.Indrugs.services;
 
 import com.example.Indrugs.DTO.MedicamentoDTO;
+import com.example.Indrugs.DTO.OrdenDTO;
 import com.example.Indrugs.entities.Medicamentos;
 import com.example.Indrugs.mapper.MedicamentosMap;
 import com.example.Indrugs.repositorios.MedicamentoRepository;
@@ -68,6 +69,11 @@ public class MedicamentosServiceImpl implements MedicamentosService{
         Medicamentos medicamento = medicRepository.findById(idMedicamento)
                 .orElseThrow(() -> new RuntimeException("Medicamento no encontrado"));
         return MedicamentosMap.mapToPaciente(medicamento);
+
+    }
+
+    @Override
+    public void guardarOrden(OrdenDTO orden) {
 
     }
 }

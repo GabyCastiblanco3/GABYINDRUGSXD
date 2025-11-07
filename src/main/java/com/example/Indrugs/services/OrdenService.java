@@ -17,4 +17,5 @@ public interface OrdenService {
     Map<String,Object> ObtenerResumenOrden();
     void crearDomicilioConOrden(Orden orden);
 
+    OrdenDTO obtenerOrdenPorId(Long id);
 }

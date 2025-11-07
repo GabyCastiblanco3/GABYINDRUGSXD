@@ -1,30 +1,69 @@
 package com.example.Indrugs.services;
 
+import jakarta.mail.internet.MimeMessage;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+
 @Service
 public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
 
-    public void enviarCorreo(String destinatario) {
-        SimpleMailMessage mensaje = new SimpleMailMessage();
-        mensaje.setTo(destinatario);
-        mensaje.setSubject("INDRUGS MEDICA");
-        mensaje.setText("Hola, acabas de ingresar un nuevo control a Indrugs Medica");
-        mensaje.setFrom("indrugsmedica@gmail.com");
+    public void enviarCorreo(String destinatario) throws MessagingException, jakarta.mail.MessagingException {
+        // Crear el mensaje
+        MimeMessage mensaje = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mensaje, true); // true: permite contenido HTML
 
-        mailSender.send(mensaje);
+        // Configuración del correo
+        helper.setTo(destinatario);
+        helper.setSubject("INDRUGS MEDICA");
+        helper.setFrom("indrugsmedica@gmail.com");
+
+        // Crear el contenido HTML para el correo
+        String contenidoHtml = "<html>" +
+                "<body style='font-family: Arial, sans-serif;'>" +
+                "<h2 style='color: ##00796b;'>¡Gracias por usar INDRUGS MEDICAL!</h2>" +
+                "<p>Hola, acabas de ingresar un nuevo control en nuestra plataforma.</p>" +
+                "<table style='border-collapse: collapse; width: 100%;'>" +
+                "<tr style='background-color: #f2f2f2;'>" +
+                "<th style='padding: 10px; text-align: left; border: 1px solid #ddd;'>Fecha Inicio</th>" +
+                "<th style='padding: 10px; text-align: left; border: 1px solid #ddd;'>Fecha Fin</th>" +
+                "<th style='padding: 10px; text-align: left; border: 1px solid #ddd;'>Problema de Salud</th>" +
+                "</tr>" +
+                "<tr>" +
+                "<td style='padding: 10px; border: 1px solid #ddd;'>15 Nov 2025</td>" +
+                "<td style='padding: 10px; border: 1px solid #ddd;'>15 Dic 2025</td>" +
+                "<td style='padding: 10px; border: 1px solid #ddd;'>Dolor en las articulaciones</td>" +
+                "</tr>" +
+                "</table>" +
+                "<p style='margin-top: 20px;'>Gracias por elegirnos. ¡Estamos aquí para ayudarte!</p>" +
+                "</body>" +
+                "</html>";
+
+        // Establecer el contenido HTML
+        helper.setText(contenidoHtml, true);
+
+        // Enviar el correo
+        try {
+            mailSender.send(mensaje);
+        } catch (MailException e) {
+            e.printStackTrace(); // Manejar excepción de correo
+        }
     }
 
-
-    public void enviarCorreoRegistro(@NotBlank(message = "El correo es obligatorio") @Email(message = "Debe ser un correo válido") String correo, @NotBlank(message = "El nombre es obligatorio") @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres") String nombre) {
+    public void enviarCorreoRegistro(@NotBlank(message = "El correo es obligatorio") @Email(message = "Debe ser un correo válido") String correo,
+                                     @NotBlank(message = "El nombre es obligatorio") @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres") String nombre) {
+        // Lógica para enviar el correo de registro
     }
 }
-

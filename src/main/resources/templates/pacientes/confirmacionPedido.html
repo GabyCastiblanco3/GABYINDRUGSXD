@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedido Confirmado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #e9fef6;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 420px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            color: #009970;
+            margin-bottom: 5px;
+        }
+
+        p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 22px;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: left;
+            margin: 15px 0;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .info strong {
+            color: #009970;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 8px 5px;
+        }
+
+        .btn-primary {
+            background: #009970;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #007e5c;
+        }
+
+        .btn-outline {
+            background: #fff;
+            color: #009970;
+            border: 2px solid #009970;
+        }
+
+        .btn-outline:hover {
+            background: #009970;
+            color: white;
+        }
+
+        .btn-blue {
+            background: #00796b;
+            color: white;
+            border: none;
+        }
+
+        .btn-blue:hover {
+            background: #00796b;
+        }
+
+        footer {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card" id="factura">
+    <h1>✅ Pedido Registrado</h1>
+    <p>Tu solicitud fue guardada exitosamente.</p>
+
+    <img th:src="@{'/imagenes/MEDICAMENTOS/TABLA/' + ${medicamento.imagenMedicamento}}" alt="Medicamento">
+
+    <h2 th:text="${medicamento.nombreMedicamento}"></h2>
+
+    <div class="info">
+        <p><strong>Cantidad:</strong> <span th:text="${orden.cantidad}"></span></p>
+        <p><strong>Fecha estimada de entrega:</strong> <span th:text="${orden.fechaEntrega}"></span></p>
+        <p><strong>Dirección de entrega:</strong> <span th:text="${orden.direccionOrden}"></span></p>
+
+        <p><strong>Teléfono de contacto:</strong> <span th:text="${orden.telefonoOrden}">3001234567</span></p>
+
+    </div>
+
+    <a href="/16.pagina_carrito_med" class="btn btn-primary">🛒 Ir al carrito</a>
+    <a href="/8.pagina_med" class="btn btn-outline">💊 Seguir comprando</a>
+    <button class="btn btn-blue" onclick="descargarFactura()">📄 Descargar factura</button>
+
+    <footer>Gracias por confiar en <strong> INDRUGS MEDICAL</strong> 💚</footer>
+</div>
+
+<script>
+    function descargarFactura() {
+        const element = document.getElementById('factura');
+        const opt = {
+            margin: 0.5,
+            filename: 'Factura_MedicExpress.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+        html2pdf().from(element).set(opt).save();
+    }
+</script>
+
+</body>
+</html>
