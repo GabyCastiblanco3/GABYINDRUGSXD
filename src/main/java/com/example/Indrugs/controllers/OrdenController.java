@@ -2,8 +2,6 @@ package com.example.Indrugs.controllers;
 
 import com.example.Indrugs.DTO.MedicamentoDTO;
 import com.example.Indrugs.DTO.OrdenDTO;
-import com.example.Indrugs.entities.Medicamentos;
-import com.example.Indrugs.entities.Orden;
 import com.example.Indrugs.entities.Usuario;
 import com.example.Indrugs.services.ArchivosService;
 import com.example.Indrugs.services.MedicamentosService;
@@ -28,49 +26,44 @@ public class OrdenController {
     @Autowired
     private ArchivosService archivosService;
 
+    // Vista para domiciliario
     @GetMapping("/14.pagina_ordenes")
     public String verOrdenesDirecto(Model model, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-        if (usuario == null) {
-            return "redirect:/login"; // Si no está logueado
-        }
+        if (usuario == null) return "redirect:/login";
 
         model.addAttribute("ordenes", ordenService.listarOrdenes());
         return "domiciliario/14.pagina_ordenes";
     }
+
+    // Vista para paciente
     @GetMapping("/16.pagina_carrito_med")
     public String verOrdenesPaciente(Model model, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-        if (usuario == null) {
-            return "redirect:/login"; // Si no está logueado
-        }
+        if (usuario == null) return "redirect:/login";
 
         model.addAttribute("ordenes", ordenService.listarOrdenesP(usuario.getIdUsuario()));
         return "pacientes/16.pagina_carrito_med";
     }
 
-    // Vista del administrador
+    // Vista para administrador
     @GetMapping("/18.pagina_orden_admin")
     public String verOrdenesAdmin(Model model, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-        if (usuario == null) {
-            return "redirect:/login"; // Si no está logueado
-        }
+        if (usuario == null) return "redirect:/login";
 
         model.addAttribute("ordenes", ordenService.listarOrdenes());
         return "administrador/18.pagina_orden_admin";
     }
 
+    // Formulario de creación de orden
     @GetMapping("/nuevo")
-    public String mostrarformulario(@RequestParam("idMedicamento") Long idMedicamento,
+    public String mostrarFormulario(@RequestParam("idMedicamento") Long idMedicamento,
                                     @RequestParam("cantidad") Integer cantidad,
-                                    HttpSession session, Model model)
-    {
+                                    HttpSession session, Model model) {
         try {
             Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-            if (usuario == null) {
-                return "redirect:/login";
-            }
+            if (usuario == null) return "redirect:/login";
 
             MedicamentoDTO medicamento = medicamentosService.buscarPorIdMedicamento(idMedicamento);
             if (medicamento == null) {
@@ -84,7 +77,6 @@ public class OrdenController {
             ordenDTO.setNombreMedicamento(medicamento.getNombreMedicamento());
             ordenDTO.setEstadoOrden("ACTIVO");
 
-            // 📌 ESTO ES LO IMPORTANTE:
             model.addAttribute("orden", ordenDTO);
             model.addAttribute("usuarioLogueado", usuario);
             model.addAttribute("medicamento", medicamento);
@@ -99,21 +91,18 @@ public class OrdenController {
         }
     }
 
-
+    // Guardar orden con archivo PDF de fórmula médica
     @PostMapping("/orden/guardar")
     public String guardarOrden(@ModelAttribute OrdenDTO ordenDTO,
-//                               @RequestParam("formulaFile") MultipartFile formulaFile,
+                               @RequestParam("formulaFile") MultipartFile formulaFile,
                                @RequestParam("idMedicamento") Long idMedicamento,
                                HttpSession session, Model model,
                                RedirectAttributes redirectAttributes) {
         try {
             Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-            if (usuario == null) {
-                return "redirect:/login";
-            }
+            if (usuario == null) return "redirect:/login";
 
             MedicamentoDTO medicamento = medicamentosService.buscarPorIdMedicamento(idMedicamento);
-
             if (medicamento == null) {
                 model.addAttribute("error", "Medicamento no encontrado");
                 return "error";
@@ -126,7 +115,15 @@ public class OrdenController {
             if (ordenDTO.getFechaEntrega() == null) {
                 ordenDTO.setFechaEntrega(LocalDateTime.now().plusDays(1));
             }
-            ordenService.crear(ordenDTO,usuario.getIdUsuario(),idMedicamento);
+
+            // Guardar archivo PDF de la fórmula médica
+            if (formulaFile != null && !formulaFile.isEmpty()) {
+                String rutaArchivo = archivosService.guardarFormulaMedica(formulaFile);
+                ordenDTO.setFotoFormula(rutaArchivo);
+            }
+
+            // Crear la orden
+            ordenService.crear(ordenDTO, usuario.getIdUsuario(), idMedicamento);
             redirectAttributes.addFlashAttribute("mensaje", "Orden creada exitosamente");
 
             model.addAttribute("medicamento", medicamento);
@@ -141,23 +138,59 @@ public class OrdenController {
         }
     }
 
-    // Marcar orden como entregada desde domiciliario
-//    @GetMapping("/domiciliario/ordenes/entregar/{id}")
-//    public String entregarOrdenDesdeDomiciliario(@PathVariable Long id) {
-//        ordenService.marcarComoEntregada(id);
-//        return "redirect:/domiciliario/14.pagina_ordenes";
-//    }
-
-    // Marcar orden como entregada desde administrador
+    // 🧹 Eliminar orden y su archivo de fórmula médica
     @GetMapping("/ordenes/eliminar/{idOrden}")
-    public String entregarOrdenDesdeAdmin(@PathVariable Long idOrden) {
-        ordenService.eliminar(idOrden);
+    public String eliminarOrden(@PathVariable Long idOrden, RedirectAttributes redirectAttributes) {
+        try {
+            // 1️⃣ Obtener la orden antes de eliminarla
+            OrdenDTO orden = ordenService.obtenerOrdenPorId(idOrden);
+
+            if (orden != null && orden.getFotoFormula() != null) {
+                // 2️⃣ Eliminar el archivo físico de la fórmula médica
+                archivosService.eliminarArchivo(orden.getFotoFormula());
+            }
+
+            // 3️⃣ Eliminar la orden de la base de datos
+            ordenService.eliminar(idOrden);
+            redirectAttributes.addFlashAttribute("mensaje", "Orden y su archivo eliminados correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al eliminar la orden: " + e.getMessage());
+        }
+
         return "redirect:/18.pagina_orden_admin";
     }
+
+    // Confirmación de pedido para paciente
     @GetMapping("/confirmacion-pedido")
     public String mostrarConfirmacion() {
         return "pacientes/confirmacionPedido";
+    }
 
+    // ✅ Aceptar orden desde admin
+    @GetMapping("/orden/admin/aceptar/{id}")
+    public String aceptarOrden(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            OrdenDTO orden = ordenService.obtenerOrdenPorId(id);
+            orden.setEstadoOrden("Aceptada");
+            ordenService.crear(orden, orden.getPaciente(), orden.getIdMedicamento());
+            redirectAttributes.addFlashAttribute("mensaje", "Orden aceptada correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al aceptar la orden: " + e.getMessage());
+        }
+        return "redirect:/18.pagina_orden_admin";
+    }
 
+    // ✅ Denegar orden desde admin
+    @GetMapping("/orden/admin/denegar/{id}")
+    public String denegarOrden(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            OrdenDTO orden = ordenService.obtenerOrdenPorId(id);
+            orden.setEstadoOrden("Denegada");
+            ordenService.crear(orden, orden.getPaciente(), orden.getIdMedicamento());
+            redirectAttributes.addFlashAttribute("mensaje", "Orden denegada correctamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al denegar la orden: " + e.getMessage());
+        }
+        return "redirect:/18.pagina_orden_admin";
     }
 }

@@ -1,0 +1,82 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 40px auto;
+}
+
+.titulo {
+    text-align: center;
+    color: #004aad;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #e8f1ff;
+    color: #004aad;
+    font-weight: 600;
+}
+
+.estado-pendiente {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.estado-camino {
+    color: #2196f3;
+    font-weight: bold;
+}
+
+.estado-entregado {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.btn {
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin: 2px;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-pendiente { background-color: #ff9800; }
+.btn-pendiente:hover { background-color: #e68900; }
+
+.btn-camino { background-color: #2196f3; }
+.btn-camino:hover { background-color: #0b7dda; }
+
+.btn-entregado { background-color: #4caf50; }
+.btn-entregado:hover { background-color: #3e8e41; }
+
+.acciones {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}

@@ -3,15 +3,12 @@ package com.example.Indrugs.mapper;
 import com.example.Indrugs.DTO.OrdenDTO;
 import com.example.Indrugs.entities.Medicamentos;
 import com.example.Indrugs.entities.Orden;
-import com.example.Indrugs.entities.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OrdenMapper {
-
-
 
     public static OrdenDTO toDTO(Orden orden) {
         if (orden == null) {
@@ -33,7 +30,9 @@ public class OrdenMapper {
         dto.setTelefonoOrden(orden.getTelefonoOrden());
         dto.setCantidad(orden.getCantidad());
         dto.setEstadoOrden(orden.getEstadoOrden());
-//        dto.setFormulaMedica(orden.getFormulaMedica());
+
+        // Mapear la fórmula médica
+        dto.setFotoFormula(orden.getFotoFormula());
 
         // Mapear medicamentos
         if (orden.getMedicamentos() != null && !orden.getMedicamentos().isEmpty()) {
@@ -46,44 +45,12 @@ public class OrdenMapper {
             Medicamentos primerMedicamento = orden.getMedicamentos().get(0);
             dto.setNombreMedicamento(primerMedicamento.getNombreMedicamento());
             dto.setIdMedicamento(primerMedicamento.getIdMedicamento());
-
         } else {
             dto.setMedicamentos(new ArrayList<>());
         }
 
         return dto;
-//        if (orden == null) {
-//            return null;
-//        }
-//
-//        OrdenDTO dto = new OrdenDTO();
-//        dto.setIdOrden(orden.getIdOrden());
-//
-//
-//        if (orden.getPaciente() != null) {
-//            dto.setPacienteNombre(orden.getPaciente().getNombre());
-//        }
-//
-//        dto.setEpsOrden(orden.getEpsOrden());
-//        dto.setFechaEntrega(orden.getFechaEntrega());
-//        dto.setDireccionOrden(orden.getDireccionOrden());
-//        dto.setTelefonoOrden(orden.getTelefonoOrden());
-//        dto.setCantidad(orden.getCantidad());
-//        dto.setEstadoOrden(orden.getEstadoOrden());
-//
-//        if (orden.getMedicamentos() != null && !orden.getMedicamentos().isEmpty()) {
-//            dto.setMedicamentos(
-//                    orden.getMedicamentos().stream()
-//                            .map(Medicamentos::getNombreMedicamento)
-//                            .collect(Collectors.toList())
-//            );
-//        } else {
-//            dto.setMedicamentos(new ArrayList<>());
-//        }
-//
-//        return dto;
     }
-
 
     public static List<OrdenDTO> toDTOList(List<Orden> ordenes) {
         if (ordenes == null) {
@@ -94,7 +61,6 @@ public class OrdenMapper {
                 .map(OrdenMapper::toDTO)
                 .collect(Collectors.toList());
     }
-
 
     public static Orden toEntity(OrdenDTO ordenDTO) {
         if (ordenDTO == null) {
@@ -109,8 +75,9 @@ public class OrdenMapper {
         orden.setTelefonoOrden(ordenDTO.getTelefonoOrden());
         orden.setCantidad(ordenDTO.getCantidad());
         orden.setEstadoOrden(ordenDTO.getEstadoOrden());
-//        orden.setFormulaMedica(ordenDTO.getFormulaMedica());
 
+        // Mapear la fórmula médica
+        orden.setFotoFormula(ordenDTO.getFotoFormula());
 
         if (ordenDTO.getIdMedicamento() != null) {
             Medicamentos medicamento = new Medicamentos();
@@ -120,10 +87,8 @@ public class OrdenMapper {
             orden.setMedicamentos(medicamentosList);
         }
 
-
         return orden;
     }
-
 
     public static void updateEntityFromDTO(Orden orden, OrdenDTO ordenDTO) {
         if (orden == null || ordenDTO == null) {
@@ -147,6 +112,9 @@ public class OrdenMapper {
         }
         if (ordenDTO.getEstadoOrden() != null) {
             orden.setEstadoOrden(ordenDTO.getEstadoOrden());
+        }
+        if (ordenDTO.getFotoFormula() != null) {
+            orden.setFotoFormula(ordenDTO.getFotoFormula());
         }
     }
 }

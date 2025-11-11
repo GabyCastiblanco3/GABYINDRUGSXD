@@ -142,7 +142,30 @@ INSERT INTO `medicamentos` (`ID_MEDICAMENTOS`, `NOMBRE_MEDICAMENTOS`, `DESCRIPCI
 
 -- --------------------------------------------------------
 
---
+CREATE TABLE pedido (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  nombre_paciente VARCHAR(100) NOT NULL,
+  direccion VARCHAR(150),
+  telefono VARCHAR(20),
+  observaciones VARCHAR(255),
+  hora_pedido DATETIME,
+  estado VARCHAR(20)
+);
+
+INSERT INTO pedido (nombre_paciente, direccion, telefono, observaciones, hora_pedido, estado)
+VALUES
+('María Gómez', 'Calle 45 #12-30, Bogotá', '3204567890', 'Entregar antes de las 5 PM', '2025-11-10 14:30:00', 'PENDIENTE'),
+
+('Juan Rodríguez', 'Carrera 10 #80-22, Medellín', '3102345678', 'Llamar al llegar', '2025-11-10 13:10:00', 'EN_CAMINO'),
+
+('Laura Pérez', 'Av. 1 de Mayo #25-14, Cali', '3008765432', 'Paciente mayor, tocar suave', '2025-11-10 09:45:00', 'PENDIENTE'),
+
+('Carlos Hernández', 'Calle 100 #15-60, Bogotá', '3216789012', 'Pago en efectivo', '2025-11-09 18:20:00', 'ENTREGADO'),
+
+('Diana Torres', 'Carrera 50 #22-19, Barranquilla', '3127894560', 'Medicamento urgente', '2025-11-10 10:15:00', 'EN_CAMINO'),
+
+('Andrés Castro', 'Calle 9 #8-55, Bucaramanga', '3115678943', 'Entregar a portería', '2025-11-09 11:00:00', 'PENDIENTE');
+
 -- Estructura de tabla para la tabla `ordenes`
 --
 
@@ -603,6 +626,8 @@ ALTER TABLE `usuarios_has_privilegios`
 ALTER TABLE `vehiculo`
   ADD CONSTRAINT `vehiculo_ibfk_1` FOREIGN KEY (`PROPIETARIO_USUARIOS`) REFERENCES `usuarios` (`ID_USUARIOS`);
 COMMIT;
+ALTER TABLE ordenes ADD COLUMN FOTO_FORMULA VARCHAR(255);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

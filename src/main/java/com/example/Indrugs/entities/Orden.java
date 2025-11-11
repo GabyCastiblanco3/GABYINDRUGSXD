@@ -18,9 +18,9 @@ public class Orden {
     @Column(name = "ID_ORDENES")
     private Long idOrden;
 
-    @ManyToOne
-    @JoinColumn(name = "USUARIOS_PACIENTE")
-    private Usuario paciente;
+        @ManyToOne
+        @JoinColumn(name = "USUARIOS_PACIENTE")
+        private Usuario paciente;
 
     @Column(name = "CANTIDADMED_ORDEN")
     private Integer cantidad;
@@ -42,6 +42,10 @@ public class Orden {
 
     @Column(name ="FORMULA_MEDICA")
     private String formulaMedica;
+
+    // 🆕 Campo para guardar el nombre/ruta de la imagen subida por el paciente
+    @Column(name = "FOTO_FORMULA")
+    private String fotoFormula;
 
     @OneToOne(mappedBy = "orden", cascade = CascadeType.ALL, orphanRemoval = true)
     private Domicilio domicilio;

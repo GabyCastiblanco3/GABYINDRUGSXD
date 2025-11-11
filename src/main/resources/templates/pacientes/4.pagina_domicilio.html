@@ -28,22 +28,23 @@
             Registrar Orden
         </h1>
 
-        <form th:action="@{/orden/guardar}" method="post" id="formuno" class="row g-4 needs-validation" novalidate th:object="${orden}">
+        <!-- Se agrega enctype para subir archivos -->
+        <form th:action="@{/orden/guardar}" method="post" enctype="multipart/form-data"
+              id="formuno" class="row g-4 needs-validation" novalidate th:object="${orden}">
 
             <!-- Datos ocultos -->
-            <!-- Datos ocultos necesarios para guardar -->
             <input type="hidden" name="idMedicamento" th:value="${idMedicamento}" />
             <input type="hidden" name="cantidad" th:value="${cantidad}" />
-
             <input type="hidden" th:field="*{pacienteNombre}" />
             <input type="hidden" th:field="*{nombreMedicamento}" />
             <input type="hidden" th:field="*{estadoOrden}" />
 
-            <!-- Mini resumen del medicamento (opcional, bonito) -->
+            <!-- Mini resumen del medicamento -->
             <div class="col-12">
                 <div class="d-flex align-items-center gap-3 mb-3">
                     <img th:src="@{'/imagenes/MEDICAMENTOS/TABLA/' + ${medicamento.imagenMedicamento}}"
-                         th:alt="${medicamento.nombreMedicamento}" style="width:72px; height:72px; object-fit:cover; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+                         th:alt="${medicamento.nombreMedicamento}"
+                         style="width:72px; height:72px; object-fit:cover; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
                     <div>
                         <div class="fw-bold" th:text="${medicamento.nombreMedicamento}">Medicamento</div>
                         <div class="text-muted small" th:text="${medicamento.descripcionMedicamento}">Descripción corta</div>
@@ -87,6 +88,15 @@
                 </div>
             </div>
 
+            <!-- Fórmula médica (archivo) -->
+            <div class="col-12">
+                <label class="form-label fw-semibold">Subir fórmula médica</label>
+                <input type="file" name="formulaFile" class="form-control" accept="image/*,.pdf" required>
+                <div class="invalid-feedback">
+                    Por favor sube la fórmula médica.
+                </div>
+            </div>
+
             <!-- Botón de Enviar -->
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
@@ -112,17 +122,16 @@
                form.classList.add('was-validated');
            }, false);
        });
-   })();
+    })();
 </script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     flatpickr("#fechaEntrega", {
-        enableTime: true, // Activa la selección de hora
-        dateFormat: "Y-m-d H:i", // Formato de fecha y hora
-        minDate: "today", // No permite seleccionar fechas pasadas
-        time_24hr: true, // 24 horas
-        defaultHour: 12, // Hora por defecto
-        defaultMinute: 0, // Minuto por defecto
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        time_24hr: true,
+        defaultHour: 12,
+        defaultMinute: 0
     });
 </script>
 
